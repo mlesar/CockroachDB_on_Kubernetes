@@ -29,7 +29,11 @@ kubectl run cockroachdb -it --image=cockroachdb/cockroach --rm --restart=Never \
 ```
 
 # Load test
+* https://www.cockroachlabs.com/docs/stable/cockroach-workload.html
 ```
+kubectl run cockroachdb -it --image=cockroachdb/cockroach --rm --restart=Never \
+-- workload run kv --init --drop --tolerate-errors --max-rate=100 --duration=2m 'postgresql://root@cockroachdb-public:26257?sslmode=disable'
+
 kubectl run cockroachdb -it --image=cockroachdb/cockroach --rm --restart=Never \
 -- workload run bank --init --drop --tolerate-errors --max-rate=1000 --duration=1m 'postgresql://root@cockroachdb-public:26257?sslmode=disable'
 
